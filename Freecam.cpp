@@ -28,14 +28,11 @@ void init(HMODULE hModule){
             auto camY = camX + 4;
             auto camZ = camY + 4;
             auto rotX = *(float*)(player + 0x13C);
-            if (rotX + 90.0 > 180.0){
-                rotX = (float)-180.0 + (float)fmod(rotX, 90.0);
-            }
-            else{
-                rotX += 90;
-            }
-            float moveX = 0, moveZ = 0;
 
+            if (rotX + 90.0 > 180.0) rotX = (float)-180.0 + (float)fmod(rotX, 90.0);
+            else rotX += 90;
+
+            float moveX = 0, moveZ = 0;
 
             if (camTickX){
                 Mem::Nop((BYTE*)camTickX, 8);
