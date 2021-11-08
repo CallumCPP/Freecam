@@ -42,7 +42,7 @@ void init(HMODULE hModule){
             float moveX = 0, moveZ = 0;
             
             if (up) speed += 0.05;
-            if (down) speed -= 0.05;
+            if (down && speed - 0.05 > 0) speed -= 0.05;
 
             if (tpTo){
                 tpTo = false;
