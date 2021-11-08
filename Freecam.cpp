@@ -11,6 +11,7 @@ void hookKey();
 void debugLogF(const std::string message);
 
 bool enabled = false;
+bool tpTo = false;
 bool w, s, a, d, space, shift;
 float speed = 0.5f;
 uintptr_t moduleBase;
@@ -24,6 +25,12 @@ void init(HMODULE hModule){
         auto camTickY = moduleBase + 0x13200F8;
         auto camTickZ = moduleBase + 0x1320100;
         if (enabled && player){
+            auto posX2 = player + 0x4C0;
+            auto posY2 = player + 0x4C4;
+            auto posZ2 = player + 0x4C8;
+            auto posX1 = player + 0x4CC;
+            auto posY1 = player + 0x4D0;
+            auto posZ1 = player + 0x4D4;
             auto camX = Mem::ResolveMultiLvlPtr(moduleBase + 0x04209468, {0x0, 0x18, 0x88, 0xAD8, 0x0, 0xB60, 0x8, 0x510});
             auto camY = camX + 4;
             auto camZ = camY + 4;
@@ -33,6 +40,18 @@ void init(HMODULE hModule){
             else rotX += 90;
 
             float moveX = 0, moveZ = 0;
+
+            if (tpTo){
+                tpTo = false;
+                *(float*)posX1 = *(float*)camX + 0.6;
+                *(float*)posY1 = *(float*)camY + 1.8;
+                *(float*)posZ1 = *(float*)camZ + 0.6;
+
+                *(float*)posX2 = *(float*)camX;
+                *(float*)posY2 = *(float*)camY;
+                *(float*)posZ2 = *(float*)camZ;
+                enabled = false;
+            }
 
             if (camTickX){
                 Mem::Nop((BYTE*)camTickX, 8);
@@ -104,6 +123,7 @@ key _key;
 void key_Callback(uint64_t key, bool isDown){
     bool cancel = false;
     if (key == 0x43 && isDown) enabled = !enabled;
+    if (key == 0x56 && isDown && enabled) tpTo = true;
     if (enabled){
         if (key == 0x57){
             w = isDown;
