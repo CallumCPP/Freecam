@@ -12,7 +12,7 @@ void debugLogF(const std::string message);
 
 bool enabled = false;
 bool tpTo = false;
-bool w, s, a, d, space, shift;
+bool w, s, a, d, space, shift, up, down;
 float speed = 0.5f;
 uintptr_t moduleBase;
 void init(HMODULE hModule){
@@ -40,6 +40,9 @@ void init(HMODULE hModule){
             else rotX += 90;
 
             float moveX = 0, moveZ = 0;
+            
+            if (up) speed += 0.05;
+            if (down) speed -= 0.05;
 
             if (tpTo){
                 tpTo = false;
@@ -147,6 +150,14 @@ void key_Callback(uint64_t key, bool isDown){
         }
         if (key == VK_SHIFT){
             shift = isDown;
+            cancel = isDown;
+        }
+        if (key == VK_UP){
+            up = isDown;
+            cancel = isDown;
+        }
+        if (key == VK_DOWN){
+            down = isDown;
             cancel = isDown;
         }
     }
