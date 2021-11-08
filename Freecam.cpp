@@ -44,43 +44,43 @@ void init(HMODULE hModule){
             if (shift) *(float*) camY -= speed;
             
             if (w){
-                moveX = (float)cos(rotX * -(PI / 180.0));
-                moveZ = (float)sin(rotX * (PI / 180.0));
+                moveX += (float)cos(rotX * -(PI / 180.0));
+                moveZ += (float)sin(rotX * (PI / 180.0));
             }
 
             if (s){
                 if (rotX + 180.0 > 180.0){
                     float tmpX = (float)(-180.0 + fmod(rotX, 180.0));
-                    moveX = (float)cos((tmpX) * PI / 180.0);
-                    moveZ = (float)sin((tmpX) * PI / 180.0);
+                    moveX += (float)cos((tmpX) * PI / 180.0);
+                    moveZ += (float)sin((tmpX) * PI / 180.0);
                 }
                 else{
-                    moveX = (float)cos((rotX + 180.0) * PI / 180.0);
-                    moveZ = (float)sin((rotX + 180.0) * PI / 180.0);
+                    moveX += (float)cos((rotX + 180.0) * PI / 180.0);
+                    moveZ += (float)sin((rotX + 180.0) * PI / 180.0);
                 }
             }
 
             if (d){
                 if (rotX + 90.0 > 180.0){
                     float tmpX = (float)(-180.0 + fmod(rotX, 90.0));
-                    moveX = (float)cos((tmpX) * PI / 180.0);
-                    moveZ = (float)sin((tmpX) * PI / 180.0);
+                    moveX += (float)cos((tmpX) * PI / 180.0);
+                    moveZ += (float)sin((tmpX) * PI / 180.0);
                 }
                 else{
-                    moveX = (float)cos((rotX + 90.0) * PI / 180.0);
-                    moveZ = (float)sin((rotX + 90.0) * PI / 180.0);
+                    moveX += (float)cos((rotX + 90.0) * PI / 180.0);
+                    moveZ += (float)sin((rotX + 90.0) * PI / 180.0);
                 }
             }
 
             if (a){
                 if (rotX - 90.0 < -180.0){
                     float tmpX = (float)(180.0 + fmod(rotX, 90.0));
-                    moveX = (float)cos((tmpX) * PI / 180.0);
-                    moveZ = (float)sin((tmpX) * PI / 180.0);
+                    moveX += (float)cos((tmpX) * PI / 180.0);
+                    moveZ += (float)sin((tmpX) * PI / 180.0);
                 }
                 else{
-                    moveX = (float)cos((rotX - 90.0) * PI / 180.0);
-                    moveZ = (float)sin((rotX - 90.0) * PI / 180.0);
+                    moveX += (float)cos((rotX - 90.0) * PI / 180.0);
+                    moveZ += (float)sin((rotX - 90.0) * PI / 180.0);
                 }
             }
 
