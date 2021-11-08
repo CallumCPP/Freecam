@@ -1,4 +1,4 @@
-#include "mem.h"
+#include "mem.hpp"
 
 void Mem::Patch(BYTE* dst, BYTE* src, unsigned int size) {
 	DWORD oldprotect;
