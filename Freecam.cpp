@@ -4,7 +4,7 @@
 #include <filesystem>
 #include <fstream>
 #include <math.h>
-#include "mem.h"
+#include "mem.hpp"
 #define PI 3.14159
 
 void hookKey();
